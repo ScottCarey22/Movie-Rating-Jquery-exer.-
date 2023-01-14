@@ -1,0 +1,42 @@
+#movie-ratings {
+    text-align: center;
+    display: inline-flex;
+
+}
+
+#submitbtn {
+    background-color: #14248a;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#submitbtn:hover {
+    background-color: #363732;
+}
+
+#rating {
+    width: 75px;
+}
+
+table {
+    width: 100%;
+    background-color: #ada8be
+}
+
+html {
+    display: block;
+    background-color: #6f5e5c;
+}
+
+#tbody {
+    text-align: center;
+    background-color: #c6caed;
+}
+
+.deletebtn:hover {
+    background-color: #f47174;
+}
+
+
+body {
+    text-align: center;
+}

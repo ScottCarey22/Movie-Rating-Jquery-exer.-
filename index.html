@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie App!!!</title>
+    <link rel="stylesheet" href="MovieApp.css">
+</head>
+
+<body>
+    <form id="movie-ratings">
+        <div><input id="movie-title" type="text" placeholder="Movie Title"></input></div>
+        <div><input id="rating" type="number" min="0" max="10" placeholder="RATING"></div>
+        <div><button id="submitbtn">RATE THAT MOVIE!</button></div>
+    </form>
+
+    <table id="rated-movies">
+        <thead id="thead">
+            <tr>
+                <th scope="col">Movie Title</th>
+                <th scope="col"> Rating</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+    </table>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
+    <script>
+        // list of all rated movies
+        let movieList = [];
+        let listNumber = 0;
+
+        $(function () {
+            $("#movie-ratings").addClass('text-center')
+            console.log('working');
+
+            // add movie and rating to movieList on click event and display on screen
+            $("#submitbtn").on('click', function (evt) {
+                evt.preventDefault();
+                let movie = $('#movie-title').val();
+                let rating = $('#rating').val();
+
+                let movieInfo = { movie, rating, listNumber };
+                // making sure the form data is submitted
+                console.log(movieInfo);
+
+                // add movieInfo into our array
+                listNumber++;
+                movieList.push(movieInfo);
+                console.log(movieList);
+
+                const addMovie = createAddMovie(movieInfo);
+
+
+                $('#tbody').prepend(addMovie);
+                $('#movie-ratings').trigger("reset");
+            });
+
+            // adding table rows to our main table
+            function createAddMovie(movieInfo) {
+                return `
+                <tr>
+                <td>${movieInfo.movie}</td>
+                 <td>${movieInfo.rating}</td>
+                 <td>
+                <button class="deletebtn" >
+                Delete
+                 </button>
+                </td>
+                <tr>
+                 `;
+            }
+
+            // click event for delete buttons - struggling with deleting the selected movie rating.
+            $("tbody").on("click", ".deletebtn", function (evt) {
+                let indexOfList = movieList.findIndex(movie => movie.listNumber === +$(evt.target).data("deleteId"));
+
+                movieList.splice(indexOfList, 1);
+
+                $(evt.target).remove();
+            });
+
+
+        });
+    </script>
+
+</body>
+
+</html>
